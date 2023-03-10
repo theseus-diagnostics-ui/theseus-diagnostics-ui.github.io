@@ -331,7 +331,7 @@ body {
 }
 .screen > .screen-content .screen-user > .name {
   position: relative;
-  font-size: 3.25rem;
+  font-size: calc(1rem + 3vw);
   font-weight: 400;
 }
 
