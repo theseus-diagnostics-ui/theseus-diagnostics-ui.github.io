@@ -16,7 +16,7 @@
 }
 
 body {
-  height: 120vh;
+  height: 100vh;
   display: grid;
   background-color: rgb(var(--background-rgb));
   margin: 0rem;
