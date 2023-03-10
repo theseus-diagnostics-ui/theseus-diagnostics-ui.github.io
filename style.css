@@ -31,7 +31,7 @@ body {
   overflow:hidden;
 }
 .screen {
-  width: 28%;
+  width: 28vmax;
   display: flex;
   border: 3px solid rgb(var(--primary-rgb) / 80%);
   aspect-ratio: 10 / 16;
@@ -40,8 +40,7 @@ body {
   overflow: hidden;
   position: relative;
   z-index: 10;
-  margin:10px 5% 10px 5%;
-  margin-bottom:10px;
+  margin:2%;
   cursor: pointer;
 }
 
@@ -115,12 +114,12 @@ body {
 @keyframes pan-image {  
   0% {
     background-position: 36% 42%;
-    background-size: 200%;
+    background-size: 250%;
   }
   
   20% {
     background-position: 30% 35%;
-    background-size: 200%;
+    background-size: 250%;
   }
   
   20.0001% { /* -- View 2 -- */
@@ -219,7 +218,7 @@ body {
 
 
 .screen > .screen-image {
-  background-image: url("https://images.unsplash.com/photo-1515266591878-f93e32bc5937?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2574&q=80");
+  background-image: url("https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1150&q=80");
   height: 100%;
   width: 100%;
   position: absolute;
@@ -332,7 +331,7 @@ body {
 }
 .screen > .screen-content .screen-user > .name {
   position: relative;
-  font-size: 4.25rem;
+  font-size: 3.25rem;
   font-weight: 400;
 }
 
