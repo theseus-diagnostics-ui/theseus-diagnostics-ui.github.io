@@ -90,8 +90,29 @@ examine.onclick = function(){
 
 const mainContent = examine.querySelector("#main-content");
 
-const potentialContent = [{query: function(valueText){return valueText.includes("WHERE") & valueText.includes("FAWFUL")}, 
-content:"<p class=\"success-text\">ADMIN USER MISSING. LAST KNOWN LOCATION (3.165, -3.04, -0.0818). TRACES OF TEMPORAL MAGIC DETECTED.</span>"}]
+const potentialContent = [
+{
+	query: function(valueText){
+				return valueText.includes("FAWFUL")
+			},
+	content: "<p class=\"success-text\">ADMIN USER NAME DETECTED. FURTHER QUERY DETAILS REQUIRED.</span>"
+},
+{
+	query: function(valueText){
+				return valueText.includes("WHERE") & 
+						valueText.includes("FAWFUL")
+			}, 
+	content: "<p class=\"success-text\">ADMIN USER MISSING. LAST KNOWN LOCATION (3.137, -3.04, -0.0818). TRACES OF TEMPORAL MAGIC DETECTED.</span>"
+},
+{
+	query: function(valueText){
+				return valueText.includes("3.137") & 
+						valueText.includes("-3.04") & 
+						(valueText.includes("-0.0818") | valueText.includes("-8.18E-2"))
+			},
+	content: "<p class=\"success-text\">COORDINATES MAP TO KNOWN STAR: LEO VI. <br/> <i class=\"fa-solid fa-camera primary-color\"></i> <br/> Screenshot this!</p>"
+}
+]
 
 function attemptFindContent(field, e){
 	e = e || window.event;
