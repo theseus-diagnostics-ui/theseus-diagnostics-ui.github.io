@@ -90,25 +90,63 @@ examine.onclick = function(){
 
 const mainContent = examine.querySelector("#main-content");
 
+var scanDisabled = false;
+
 const potentialContent = [
 {
 	query: function(valueText){
 				return valueText.includes("FAWFUL")
 			},
-	content: "<p class=\"success-text\">ADMIN USER NAME DETECTED. FURTHER QUERY DETAILS REQUIRED.</span>"
+	content: "<p class=\"success-text\">ADMIN USER NAME DETECTED. FURTHER QUERY DETAILS REQUIRED.</p>"
 },
 {
 	query: function(valueText){
-				return valueText.includes("WHERE") & 
+		return valueText.match(/SCANDISABLED\((.*)\)/)
+	},
+	content: function(valueText){
+		newScanValue = valueText.match(/SCANDISABLED\((.*)\)/)[1]
+		if (newScanValue) {
+			 globalThis.scanDisabled = JSON.parse(newScanValue.toLowerCase());
+			 return `<p class=\"success-text\">SCANDISABLED SET TO ${scanDisabled.toString().toUpperCase()};</p>`
+		}
+		else{
+			return `<p class=\"success-text\">SCANDISABLED CURRENTLY SET TO ${scanDisabled.toString().toUpperCase()};</p>`
+		}
+	}
+},
+{
+	query:function(valueText){
+				return valueText.match(/^SCAN\(.*\)/) || valueText.match(/^SCAN$/)
+			},
+	content: function(valueText){
+		if (scanDisabled) {
+			return "<p class=\"success-text\">SCANNING IS DISABLED. PLEASE REENABLE SCAN TO CONTINUE."
+		} else {
+			scanValue = valueText.match(/SCAN\((.*)\)/)
+			if (!scanValue || !scanValue[1]){
+				return "<p class=\"success-text\">USAGE: SCAN(&lt;target&gt;)</p>"
+			} else {
+				if (scanValue.includes("ARTEMIS")) {
+					globalThis.scanDisabled = true;
+					return "<span class=\"error-text\" onanimationend=\"eraseMainContent()\"> ABORT ABORT ABORT </span>";
+				}
+				return `<p class=\"success-text\">SCANNING FOR ${scanValue[1]}...</p>`
+			}
+		}
+	}
+},
+{
+	query: function(valueText){
+				return (valueText.includes("WHERE") || (valueText.match(/SCAN\(.*\)/) && !scanDisabled)) &&
 						valueText.includes("FAWFUL")
 			}, 
-	content: "<p class=\"success-text\">ADMIN USER MISSING. LAST KNOWN LOCATION (3.137, -3.04, -0.0818). TRACES OF TEMPORAL MAGIC DETECTED.</span>"
+	content: "<p class=\"success-text\">ADMIN USER MISSING. LAST KNOWN LOCATION (3.137, -3.04, -0.0818). TRACES OF TEMPORAL MAGIC DETECTED.</p>"
 },
 {
 	query: function(valueText){
-				return valueText.includes("3.137") & 
-						valueText.includes("-3.04") & 
-						(valueText.includes("-0.0818") | valueText.includes("-8.18E-2"))
+				return valueText.includes("3.137") &&
+						valueText.includes("-3.04") && 
+						(valueText.includes("-0.0818") || valueText.includes("-8.18E-2"))
 			},
 	content: "<p class=\"success-text\">COORDINATES MAP TO KNOWN STAR: LEO VI. <br/> <i class=\"fa-solid fa-camera primary-color\"></i> <br/> Screenshot this!</p>"
 }
@@ -116,13 +154,20 @@ const potentialContent = [
 
 function attemptFindContent(field, e){
 	e = e || window.event;
-	if (e.key === "Enter"){
+	if (e.key === "Enter") {
 		content = "<span class=\"error-text\" onanimationend=\"eraseMainContent()\">QUERY NOT FOUND</span>"
 		valueText = field.value.toUpperCase();
 		console.log(valueText);
 		for(const item of potentialContent){
-			if(item.query(valueText)){
-				content = item.content;
+			if (item.query(valueText)) {
+				if (item.content instanceof Function) {
+					content = item.content(valueText);
+				} else {
+					content = item.content;
+				}
+				if ("onFind" in item) { 
+					item.onFind(valueText)
+				}
 			}
 		}
 		mainContent.innerHTML = content;
