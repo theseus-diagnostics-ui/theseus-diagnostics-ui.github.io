@@ -1,11 +1,11 @@
 <html>
   <head>
-    <link href="https://theseus-diagnostics-ui.github.io/style.css" rel="stylesheet"/>
+    <link href="./style.css" rel="stylesheet"/>
   </head>
 
 <body>
   <div class="flex-container">
-    <div class="screen examine">  
+    <div class="screen examine" data-mode="dormant">  
       <div class="screen-image"></div>  
       <div class="screen-overlay"></div>  
       <div class="screen-content">
@@ -15,10 +15,15 @@
             <span class="name" data-iteration=0 data-value="EXAMINE">EXAMINE</span>
           </div>
         </div>
-        <div class="examine-click-content"></div>
+        <div class="examine-click-content">
+			<div class="examine-click-subcontent hiding">
+				<input type="text" class="examine-click-textbox" placeholder="QUERY" onkeypress="attemptFindContent(this, event)">
+				<div id="main-content"></div>
+			</div>
+		</div>
       </div>
     </div>
-    <div class="screen screen2 locked">  
+    <div class="screen screen2 locked" data-mode="dormant">  
       <div class="screen-image2"></div>  
       <div class="screen-overlay"></div>  
       <div class="screen-content">
@@ -32,5 +37,13 @@
     <div id="blob"></div>
   </div>
   <div id="blur"></div>
-  <script src="https://theseus-diagnostics-ui.github.io/action.js"></script>
+  <div class="bg-space">
+      <div class="bg-stars"></div>
+      <div class="bg-stars"></div>
+      <div class="bg-stars"></div>
+      <div class="bg-stars"></div>
+      <div class="bg-stars"></div>
+      <div class="bg-stars"></div>
+   </div>
+  <script src="./action.js"></script>
 </body>

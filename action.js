@@ -22,28 +22,35 @@ let interval = null;
 const screens = document.querySelectorAll(".screen");
 screens.forEach(function(screen){
   screen.onmouseenter = event => {  
-    let name = screen.querySelector(".name");
-    name.dataset.iteration = 0;
+	if(screen.dataset.mode === "dormant"){
+		let name = screen.querySelector(".name");
+		name.dataset.iteration = 0;
+		clearInterval(interval);
+		
+		interval = setInterval(() => {
+		  name.innerText = name.innerText
+			.split("")
+			.map((letter, index) => {
+			  if((index*3) < parseInt(name.dataset.iteration)) {
+				return name.dataset.value[index];
+			  }
+
+			  return letters[Math.floor(Math.random() * 26)]
+			})
+			.join("");
+
+		  if(parseInt(name.dataset.iteration) >= name.dataset.value.length * 3){ 
+			clearInterval(interval);
+		  }
+
+		  name.dataset.iteration = parseInt(name.dataset.iteration) + 1;
+		}, 30);
+	  }
+  }
+  screen.onmouseleave = () => {
     clearInterval(interval);
-
-    interval = setInterval(() => {
-      name.innerText = name.innerText
-        .split("")
-        .map((letter, index) => {
-          if((index*3) < parseInt(name.dataset.iteration)) {
-            return name.dataset.value[index];
-          }
-
-          return letters[Math.floor(Math.random() * 26)]
-        })
-        .join("");
-
-      if(parseInt(name.dataset.iteration) >= name.dataset.value.length * 3){ 
-        clearInterval(interval);
-      }
-
-      name.dataset.iteration = parseInt(name.dataset.iteration) + 1;
-    }, 30);
+    let name = screen.querySelector(".name");
+    name.innerText = name.dataset.value;
   }
 })
 
@@ -56,16 +63,41 @@ locked.onclick = function(){
 }
 
 const examine = document.querySelector(".examine");
-// const examineClickContent = examine.querySelector(".examine-click-content");
+let mag = examine.querySelector(".magnifying-glass");
+const examineClickContent = examine.querySelector(".examine-click-content");
+
 magnifyingGlassListener = function(event){
   mag.classList.remove("fade-out");
-  mag.classList.add("hidden");
-  mag.removeEventListener("animationend", magnifyingGlassListener);
-//  examineClickContent.classList.add("examine-click-content-grow");
+  mag.classList.add("squish-flex-to-hide");
 }
 
+
 examine.onclick = function(){
-  let mag = examine.querySelector(".magnifying-glass");
-  mag.classList.add("fade-out");
-  mag.addEventListener("animationend", magnifyingGlassListener);
+	if(examine.dataset.mode === "dormant"){
+		mag.addEventListener("transitionend", magnifyingGlassListener, {once:true});
+		mag.classList.add("fade-out");
+		let screenMove = examine.querySelector(".screen-move-group");
+		screenMove.classList.add("squish-gap");
+		examineClickContent.classList.add("examine-click-content-grow");
+		let subcontent = examineClickContent.querySelector(".examine-click-subcontent");
+		subcontent.classList.remove("hiding");
+		examine.dataset.mode = "active"
+	} else{
+		
+		
+	}
 }
+
+const mainContent = examine.querySelector("#main-content");
+
+function attemptFindContent(field, e){
+	e = e || window.event;
+	if (e.key === "Enter"){
+		mainContent.innerHTML = "<span class=\"error-text\" onanimationend=\"eraseMainContent()\">QUERY NOT FOUND</span>"
+	}
+}
+
+function eraseMainContent(){
+	mainContent.innerHTML = "";
+}
+
