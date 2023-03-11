@@ -309,7 +309,7 @@ body {
 
 .error-text{
   font-family: "Courier New", monospace;
-  font-size: calc(1rem + 1vw);
+  font-size: calc(1rem + 0.6vw);
   font-weight: 600;    
   color: var(--error-text-rgb);
   text-shadow: rgb(0 0 0) 0px 0px 10px;
@@ -758,7 +758,7 @@ border: 5px solid var(--error-text-rgb);
 .examine-click-textbox{
 	width: 80%;
     padding: 12px 20px;
-    font-size: calc(1rem + 1vw);
+    font-size: calc(1rem + 0.6vw);
     border: 5px solid rgb(var(--primary-rgb));
 	border-radius: 3px;
 	background-color: rgb(var(--primary-rgb) / 15%);
@@ -794,4 +794,21 @@ border: 5px solid var(--error-text-rgb);
 }
 .hiding{
 	opacity:0;
+}
+#main-content{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content:flex-start;
+}
+.success-text{
+  width: 90%;
+  font-family: "Courier New", monospace;
+  font-size: calc(1rem + 0.6vw);
+  font-weight: 600;    
+  color: white;
+  text-shadow: rgb(0 0 0) 0px 0px 10px;
+  background-color: rgb(var(--primary-rgb) / 15%);
+  padding: 15px;
+  text-align:center;
 }

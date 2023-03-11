@@ -90,10 +90,21 @@ examine.onclick = function(){
 
 const mainContent = examine.querySelector("#main-content");
 
+const potentialContent = [{query: function(valueText){return valueText.includes("WHERE") & valueText.includes("FAWFUL")}, 
+content:"<p class=\"success-text\">ADMIN USER MISSING. LAST KNOWN LOCATION (3.165, -3.04, -0.0818). TRACES OF TEMPORAL MAGIC DETECTED.</span>"}]
+
 function attemptFindContent(field, e){
 	e = e || window.event;
 	if (e.key === "Enter"){
-		mainContent.innerHTML = "<span class=\"error-text\" onanimationend=\"eraseMainContent()\">QUERY NOT FOUND</span>"
+		content = "<span class=\"error-text\" onanimationend=\"eraseMainContent()\">QUERY NOT FOUND</span>"
+		valueText = field.value.toUpperCase();
+		console.log(valueText);
+		for(const item of potentialContent){
+			if(item.query(valueText)){
+				content = item.content;
+			}
+		}
+		mainContent.innerHTML = content;
 	}
 }
 
