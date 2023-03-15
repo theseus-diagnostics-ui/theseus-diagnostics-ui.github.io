@@ -140,7 +140,7 @@ const potentialContent = [
 				return (valueText.includes("WHERE") || (valueText.match(/SCAN\(.*\)/) && !scanDisabled)) &&
 						valueText.includes("FAWFUL")
 			}, 
-	content: "<p class=\"success-text\">ADMIN USER MISSING. LAST KNOWN LOCATION (3.137, -3.04, -0.0818). TRACES OF TEMPORAL MAGIC DETECTED.</p>"
+	content: "<p class=\"success-text\">ADMIN USER MISSING. LAST KNOWN LOCATION: TELEPORTER - AISLE 24, SHELF D, BOX 6. TRACES OF TEMPORAL MAGIC DETECTED.</p>"
 },
 {
 	query: function(valueText){
