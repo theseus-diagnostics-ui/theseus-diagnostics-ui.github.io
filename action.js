@@ -149,6 +149,12 @@ const potentialContent = [
 						(valueText.includes("-0.0818") || valueText.includes("-8.18E-2"))
 			},
 	content: "<p class=\"success-text\">COORDINATES MAP TO KNOWN STAR: LEO VI. <br/> <i class=\"fa-solid fa-camera primary-color\"></i> <br/> Screenshot this!</p>"
+},
+{
+	query: function(valueText){
+		return valueText.includes("METARENA")
+	},
+	content: "<span class=\"error-text\" onanimationend=\"eraseMainContent()\"> ENTER PASSWORD TO ENABLE</span>"
 }
 ]
 
