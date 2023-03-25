@@ -165,12 +165,12 @@ const potentialContent = [
 },
 {
 	query: function(valueText){
-		return valueText.includes("PEAL") && !(globalThis.metarenaEnabled)
+		return valueText.includes("IHAVEFURY") && !(globalThis.metarenaEnabled)
 	},
 	content: "<p class=\"success-text\">PASSWORD ACCEPTED, ADVANCED FEATURES UNLOCKED</span>"
 },{
 	query: function(valueText){
-		return valueText.includes("PEAL")
+		return valueText.includes("NEXUS")
 	}
 	content: "<p class=\"success-text\">Okay, I'm going to be real with you, this is a lot to type out. I have the short notes of what I'm looking to have here, but it's a lot. For now, IHAVEFURY is the password that unlocks the Metarena. Love you all, will let you know when this is actually updated with content.</p>"
 }
