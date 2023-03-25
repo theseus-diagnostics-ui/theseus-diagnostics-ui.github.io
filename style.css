@@ -800,7 +800,7 @@ border: 5px solid var(--error-text-rgb);
 	flex-direction: column;
 	align-items: center;
 	justify-content:flex-start;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 #main-content::-webkit-scrollbar{

@@ -167,13 +167,16 @@ const potentialContent = [
 	query: function(valueText){
 		return valueText.includes("IHAVEFURY") && !(globalThis.metarenaEnabled)
 	},
-	content: "<p class=\"success-text\">PASSWORD ACCEPTED, ADVANCED FEATURES UNLOCKED</span>"
+	content: function(valueText){
+		globalThis.metarenaEnabled = true;
+		return "<p class=\"success-text\">PASSWORD ACCEPTED, ADVANCED FEATURES UNLOCKED</span>";
+	}
 },
 {
 	query: function(valueText){
 		return valueText.includes("NEXUS")
 	},
-	content: "<p class=\"success-text\">Okay, I'm going to be real with you, this is a lot to type out. I have the short notes of what I'm looking to have here, but I've been stupid busy at work this past week and just haven't had time. For now, IHAVEFURY is the password that unlocks the Metarena. Love you all, will let you know when this is actually updated with content.</p>"
+	content: "<p class=\"success-text\" style=\"font-size: calc(1rem + 0.2vw);\">Okay, I'm going to be real with you, this is a lot to type out, and I've been stupid busy at work this past week and just haven't had time. For now, IHAVEFURY is the password that unlocks the Metarena. Love you all, will let you know when this is actually updated with content.</p>"
 },
 {
 	query: function(valueText){
