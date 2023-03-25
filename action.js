@@ -172,15 +172,16 @@ const potentialContent = [
 {
 	query: function(valueText){
 		return valueText.includes("NEXUS")
-	}
+	},
 	content: "<p class=\"success-text\">Okay, I'm going to be real with you, this is a lot to type out. I have the short notes of what I'm looking to have here, but I've been stupid busy at work this past week and just haven't had time. For now, IHAVEFURY is the password that unlocks the Metarena. Love you all, will let you know when this is actually updated with content.</p>"
 },
 {
 	query: function(valueText){
 		return valueText.includes("PEAL")
-	}
-}
+	},
 	content: "<p class=\"success-text\">There's also supposed to be an article here. Imagine having free time lmao</p>"
+}
+	
 ]
 
 function attemptFindContent(field, e){
