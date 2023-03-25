@@ -91,6 +91,7 @@ examine.onclick = function(){
 const mainContent = examine.querySelector("#main-content");
 
 var scanDisabled = false;
+var metarenaEnabled = false;
 
 const potentialContent = [
 {
@@ -152,9 +153,26 @@ const potentialContent = [
 },
 {
 	query: function(valueText){
-		return valueText.includes("METARENA")
+		return valueText.includes("METARENA") && !(globalThis.metarenaEnabled)
 	},
 	content: "<span class=\"error-text\" onanimationend=\"eraseMainContent()\"> ENTER PASSWORD TO ENABLE</span>"
+},
+{
+	query: function(valueText){
+		return valueText.includes("METARENA") && (globalThis.metarenaEnabled)
+	},
+	content: "<p class=\"success-text\">MICROMETARENA IS ENABLED. SUCCESS CODE 111703 <br/> <i class=\"fa-solid fa-camera primary-color\"></i> <br/> Screenshot this!</span>"
+},
+{
+	query: function(valueText){
+		return valueText.includes("PEAL") && !(globalThis.metarenaEnabled)
+	},
+	content: "<p class=\"success-text\">PASSWORD ACCEPTED, ADVANCED FEATURES UNLOCKED</span>"
+},{
+	query: function(valueText){
+		return valueText.includes("PEAL")
+	}
+	content: "<p class=\"success-text\">Okay, I'm going to be real with you, this is a lot to type out. I have the short notes of what I'm looking to have here, but it's a lot. For now, IHAVEFURY is the password that unlocks the Metarena. Love you all, will let you know when this is actually updated with content.</p>"
 }
 ]
 
